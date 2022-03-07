@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import styles from './NumAndSignButtons.module.css';
 import classNames from "classnames";
-// import { ResultContext } from "../../context/ResultContext";
+import { ResultContext } from "../../context/ResultContext";
 import { FirstNumberContext } from "../../context/FirstNumberContext";
 import { SecondNumberContext } from "../../context/SecondNumberContext";
 import { SignContext } from "../../context/SignContext";
@@ -11,8 +11,9 @@ function NumAndSignButtons ({ setFirst, setSecond, setSign, setResult,
     const firstNumber = useContext(FirstNumberContext);
     const secondNumber = useContext(SecondNumberContext);
     const sign = useContext(SignContext);
-    // const result = useContext(ResultContext)
+    const result = useContext(ResultContext);
 
+    // по нажатой кнопке на число или . определяет в какой операнд записать
     function handleClickNums (evt) {
         const buttonText =evt.target.textContent;
         if (secondNumber === '' && sign === '') {
@@ -20,7 +21,6 @@ function NumAndSignButtons ({ setFirst, setSecond, setSign, setResult,
                 setResult(firstNumber)
             } else {
                 setFirst(firstNumber + buttonText)
-                // whatIsNumber = 'firstNum';
                 setWhatIsNumber('firstNum');
                 setResult(firstNumber)
             }
@@ -30,14 +30,12 @@ function NumAndSignButtons ({ setFirst, setSecond, setSign, setResult,
                     setFirst(buttonText)
                     setResult(firstNumber)
                     setWhatIsNumber('firstNum')
-                    // whatIsNumber = 'firstNum';
                 }
                 else {
                     setSecond(secondNumber + buttonText)
                     setResult(secondNumber)
-                    setWhatIsNumber('secondNum')
-                    // whatIsNumber = 'secondNum';
-                    setFinish(false)
+                    setWhatIsNumber('secondNum');
+                    setFinish(false);
                 }
     
             }
@@ -51,12 +49,24 @@ function NumAndSignButtons ({ setFirst, setSecond, setSign, setResult,
                 // whatIsNumber = whatIsNumber = 'secondNum';
             }
             return;
+    }
 
+    // возвести число в квадрат
+    function quadrateNumber () {
+        if (whatIsNumber === 'firstNum') {
+            setFirst(firstNumber * firstNumber);
+            setResult(firstNumber);
+        }
+    else if (whatIsNumber === 'secondNum') {
+        setSecond(secondNumber * secondNumber);
+        setResult(secondNumber);
+    }
     }
 
     return (
         <section className={styles.buttons}>
-            <button type="button" className={classNames(styles.btn, styles.btn_grey, styles.quadrate)}>x²</button>
+            <button type="button" className={classNames(styles.btn, styles.btn_grey, styles.quadrate)}
+            onClick={quadrateNumber} >x²</button>
             <button type="button" className={classNames(styles.btn, styles.fraction, styles.btn_grey)}>¹⁄ₓ</button>
             <button type="button" className={classNames(styles.btn, styles.sqrt, styles.btn_grey)}>√ₓ</button>
             <button type="button" className={classNames(styles.btn, styles.devide, styles.btn_grey, styles.simpleSign)}

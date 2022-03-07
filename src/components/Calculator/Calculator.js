@@ -19,6 +19,7 @@ function Calculator ({ setFirst, setSecond, setSign, setResult, firstNumber, sec
     const [finish, setFinish] = useState(false);
     // const [isResult, setIsResult] = useState(false);
 
+    // сосчитать числа + - / *
     function calculate () {
         
         switch (sign) {
@@ -63,6 +64,7 @@ function Calculator ({ setFirst, setSecond, setSign, setResult, firstNumber, sec
         // whatIsNumber = 'firstNum';
     }
 
+    // для знаков
     function handleClickSimpleSigns (evt) {
         calculate();
         setSign(evt.target.textContent);
@@ -72,6 +74,7 @@ function Calculator ({ setFirst, setSecond, setSign, setResult, firstNumber, sec
         setFinish(true);
     }
 
+    // =
     function handleSubmit (evt) {
         evt.preventDefault();
         if (firstNumber !== '' && secondNumber !== '' && sign === '') {
@@ -88,7 +91,7 @@ function Calculator ({ setFirst, setSecond, setSign, setResult, firstNumber, sec
     <form className={styles.form} onSubmit={handleSubmit} >
         <Result setResult={setResult} />
         <MemoryButtons />
-        <SignButtons />
+        <SignButtons handleClickSimpleSigns={handleClickSimpleSigns}/>
         <NumAndSignButtons setFirst={setFirst} setSecond={setSecond} setSign={setSign} 
         setResult={setResult} finish={finish} setFinish={setFinish} whatIsNumber={whatIsNumber} setWhatIsNumber={setWhatIsNumber}
         handleClickSimpleSigns={handleClickSimpleSigns} />

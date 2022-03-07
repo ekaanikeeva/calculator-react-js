@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./SignButtons.module.css";
 import classNames from "classnames";
 
-function SignButtons() {
+function SignButtons({ handleClickSimpleSigns }) {
   return (
     <section className={styles.signButtons}>
       <button
@@ -12,13 +12,13 @@ function SignButtons() {
         %
       </button>
       <button
-        type="button"
+        type="button" 
         className={classNames(styles.btn, styles.c, styles.btn_grey)}
       >
         c
       </button>
       <button
-        type="button"
+        type="button" 
         className={classNames(styles.btn, styles.btn_grey, styles.ce)}
       >
         ce

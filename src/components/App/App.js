@@ -16,11 +16,11 @@ function App() {
   const [whatIsNumber, setWhatIsNumber] = useState(null);
 
 useEffect(()=> {
-  // console.log(firstNumber, secondNumber, sign, result, whatIsNumber)
+  console.log(firstNumber, secondNumber, sign, result, whatIsNumber)
   if (whatIsNumber === 'firstNum') setResult(firstNumber)
   else if (whatIsNumber === 'secondNum') setResult(secondNumber)
   else setResult(sign)
-}, [firstNumber, secondNumber, sign])
+}, [firstNumber, sign, secondNumber, whatIsNumber])
 
   return (
     <div>
