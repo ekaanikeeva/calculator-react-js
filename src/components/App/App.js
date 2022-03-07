@@ -12,18 +12,15 @@ function App() {
   const [secondNumber, setSecondNumber] = useState('');
   const [sign, setSign] = useState('');
   const [result, setResult] = useState(0);
+  const [isSubmit, setIsSubmit] = useState(false);
+  const [whatIsNumber, setWhatIsNumber] = useState(null);
 
 useEffect(()=> {
-  setResult(firstNumber)
-}, [firstNumber])
-
-useEffect(()=> {
-  setResult(secondNumber)
-}, [secondNumber])
-
-useEffect(()=> {
-  setResult(sign)
-}, [sign])
+  // console.log(firstNumber, secondNumber, sign, result, whatIsNumber)
+  if (whatIsNumber === 'firstNum') setResult(firstNumber)
+  else if (whatIsNumber === 'secondNum') setResult(secondNumber)
+  else setResult(sign)
+}, [firstNumber, secondNumber, sign])
 
   return (
     <div>
@@ -32,8 +29,9 @@ useEffect(()=> {
           <SecondNumberContext.Provider value={secondNumber}>
             <SignContext.Provider value={sign}>
               <Calculator setFirst={setFirstNumber} setSecond={setSecondNumber} 
-              setSign={setSign} setResult={setResult} 
-              firstNumber={firstNumber} secondNumber={secondNumber}sign={sign}/>
+              setSign={setSign} setResult={setResult} setIsSubmit={setIsSubmit}
+              firstNumber={firstNumber} secondNumber={secondNumber}sign={sign}
+              whatIsNumber={whatIsNumber} setWhatIsNumber={setWhatIsNumber} />
             </SignContext.Provider>
           </SecondNumberContext.Provider>
         </FirstNumberContext.Provider>

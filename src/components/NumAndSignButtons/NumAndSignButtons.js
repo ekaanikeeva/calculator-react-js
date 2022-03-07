@@ -7,7 +7,7 @@ import { SecondNumberContext } from "../../context/SecondNumberContext";
 import { SignContext } from "../../context/SignContext";
 
 function NumAndSignButtons ({ setFirst, setSecond, setSign, setResult, 
-    finish, setFinish, handleClickSimpleSigns}) {
+    finish, setFinish, handleClickSimpleSigns, whatIsNumber, setWhatIsNumber}) {
     const firstNumber = useContext(FirstNumberContext);
     const secondNumber = useContext(SecondNumberContext);
     const sign = useContext(SignContext);
@@ -21,18 +21,21 @@ function NumAndSignButtons ({ setFirst, setSecond, setSign, setResult,
             } else {
                 setFirst(firstNumber + buttonText)
                 // whatIsNumber = 'firstNum';
-                // setResult(firstNumber)
+                setWhatIsNumber('firstNum');
+                setResult(firstNumber)
             }
             }
             else if (firstNumber!=='' && secondNumber!=='' && finish) {
                 if (sign === '') {
                     setFirst(buttonText)
-                    // setResult(firstNumber)
+                    setResult(firstNumber)
+                    setWhatIsNumber('firstNum')
                     // whatIsNumber = 'firstNum';
                 }
                 else {
                     setSecond(secondNumber + buttonText)
-                    // setResult(secondNumber)
+                    setResult(secondNumber)
+                    setWhatIsNumber('secondNum')
                     // whatIsNumber = 'secondNum';
                     setFinish(false)
                 }
@@ -43,8 +46,8 @@ function NumAndSignButtons ({ setFirst, setSecond, setSign, setResult,
             }
             else {
                 setSecond(secondNumber + buttonText)
-                // setResult(secondNumber)
-
+                setResult(secondNumber)
+                setWhatIsNumber('secondNum')
                 // whatIsNumber = whatIsNumber = 'secondNum';
             }
             return;

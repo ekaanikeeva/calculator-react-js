@@ -11,7 +11,7 @@ import NumAndSignButtons from "../NumAndSignButtons/NumAndSignButtons";
 // import { SignContext } from "../../context/SignContext";
 
 function Calculator ({ setFirst, setSecond, setSign, setResult, firstNumber, secondNumber,
-     sign, setIsSubmit}) {
+     sign, setIsSubmit, whatIsNumber, setWhatIsNumber}) {
     // const result = useContext(ResultContext);
     // const firstNumber = useContext(FirstNumberContext);
     // const secondNumber = useContext(SecondNumberContext);
@@ -39,6 +39,7 @@ function Calculator ({ setFirst, setSecond, setSign, setResult, firstNumber, sec
                 // setIsResult(true)
                 break;
             case '/':
+                console.log('calcdel')
                 if (secondNumber === '') return;
                 if (secondNumber === '0') {
                     setResult('Error');
@@ -56,8 +57,9 @@ function Calculator ({ setFirst, setSecond, setSign, setResult, firstNumber, sec
         setFinish(true);
         setSign('')
         setSecond('')
-        setResult(firstNumber)
-        // setIsSubmit(false)
+        // setResult(firstNumber)
+        setIsSubmit(false)
+        setWhatIsNumber('firstNum')
         // whatIsNumber = 'firstNum';
     }
 
@@ -66,6 +68,7 @@ function Calculator ({ setFirst, setSecond, setSign, setResult, firstNumber, sec
         setSign(evt.target.textContent);
         // if (!isResult) setResult(sign);
         // else setResult(firstNumber);
+        setIsSubmit(true)
         setFinish(true);
     }
 
@@ -87,7 +90,7 @@ function Calculator ({ setFirst, setSecond, setSign, setResult, firstNumber, sec
         <MemoryButtons />
         <SignButtons />
         <NumAndSignButtons setFirst={setFirst} setSecond={setSecond} setSign={setSign} 
-        setResult={setResult} finish={finish} setFinish={setFinish} 
+        setResult={setResult} finish={finish} setFinish={setFinish} whatIsNumber={whatIsNumber} setWhatIsNumber={setWhatIsNumber}
         handleClickSimpleSigns={handleClickSimpleSigns} />
         
     </form>
