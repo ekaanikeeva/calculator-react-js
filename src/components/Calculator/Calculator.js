@@ -91,9 +91,12 @@ function Calculator ({ setFirst, setSecond, setSign, setResult, firstNumber, sec
     <form className={styles.form} onSubmit={handleSubmit} >
         <Result setResult={setResult} />
         <MemoryButtons />
-        <SignButtons handleClickSimpleSigns={handleClickSimpleSigns}/>
+        <SignButtons setFirst={setFirst} setSecond={setSecond} setSign={setSign} 
+        setResult={setResult} finish={finish} setFinish={setFinish} whatIsNumber={whatIsNumber} 
+        setWhatIsNumber={setWhatIsNumber}/>
         <NumAndSignButtons setFirst={setFirst} setSecond={setSecond} setSign={setSign} 
-        setResult={setResult} finish={finish} setFinish={setFinish} whatIsNumber={whatIsNumber} setWhatIsNumber={setWhatIsNumber}
+        setResult={setResult} finish={finish} setFinish={setFinish} whatIsNumber={whatIsNumber} 
+        setWhatIsNumber={setWhatIsNumber}
         handleClickSimpleSigns={handleClickSimpleSigns} />
         
     </form>
