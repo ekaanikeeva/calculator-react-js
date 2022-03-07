@@ -57,10 +57,10 @@ function NumAndSignButtons ({ setFirst, setSecond, setSign, setResult,
             setFirst(firstNumber * firstNumber);
             setResult(firstNumber);
         }
-    else if (whatIsNumber === 'secondNum') {
-        setSecond(secondNumber * secondNumber);
-        setResult(secondNumber);
-    }
+        else if (whatIsNumber === 'secondNum') {
+            setSecond(secondNumber * secondNumber);
+            setResult(secondNumber);
+        }
     }
 
     return (

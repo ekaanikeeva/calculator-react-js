@@ -13,6 +13,7 @@ function SignButtons({ setFirst, setSecond, setSign, setResult,
     // const sign = useContext(SignContext);
     // const result = useContext(ResultContext);
 
+    // очистить все
     function clearResult () {
         setFirst('');
         setSecond('');
@@ -21,13 +22,20 @@ function SignButtons({ setFirst, setSecond, setSign, setResult,
         // setResult(0)
     }
     
+    // очистить число
+    function clearNum () {
+        if (whatIsNumber === 'firstNum') setFirst('');
+        else if (whatIsNumber === 'secondNum') setSecond('');
+    }
+
     return (
     <section className={styles.signButtons}>
 
         <button type="button" className={classNames(styles.btn, styles.percent, styles.btn_grey)}>%</button>
         <button type="button" className={classNames(styles.btn, styles.c, styles.btn_grey)}
         onClick={clearResult}>c</button>
-        <button type="button" className={classNames(styles.btn, styles.btn_grey, styles.ce)}>ce</button>
+        <button type="button" className={classNames(styles.btn, styles.btn_grey, styles.ce)}
+        onClick={clearNum}>ce</button>
         <button type="button" className={classNames(styles.btn, styles.backspace, styles.btn_grey)}>⌫</button>
         <button type="button" className={classNames(styles.btn, styles.openBracket, styles.btn_grey)}>(</button>
         <button type="button" className={classNames(styles.btn, styles.closeBracket, styles.btn_grey)}>)</button>
