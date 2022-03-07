@@ -13,7 +13,7 @@ function NumAndSignButtons ({ setFirst, setSecond, setSign, setResult,
     const sign = useContext(SignContext);
     const result = useContext(ResultContext);
 
-    // по нажатой кнопке на число или . определяет в какой операнд записать
+    // по нажатой кнопке на число определяет в какой операнд записать
     function handleClickNums (evt) {
         const buttonText =evt.target.textContent;
         if (secondNumber === '' && sign === '') {
@@ -63,12 +63,25 @@ function NumAndSignButtons ({ setFirst, setSecond, setSign, setResult,
         }
     }
 
+    function fractionNumber () {
+        if (whatIsNumber === 'firstNum') {
+            setFirst(1 / firstNumber);
+            setResult(firstNumber);
+        }
+        else if (whatIsNumber === 'secondNum') {
+            setSecond(1 / secondNumber);
+            setResult(secondNumber);
+        }
+    }
+
     return (
         <section className={styles.buttons}>
             <button type="button" className={classNames(styles.btn, styles.btn_grey, styles.quadrate)}
             onClick={quadrateNumber} >x²</button>
-            <button type="button" className={classNames(styles.btn, styles.fraction, styles.btn_grey)}>¹⁄ₓ</button>
-            <button type="button" className={classNames(styles.btn, styles.sqrt, styles.btn_grey)}>√ₓ</button>
+            <button type="button" className={classNames(styles.btn, styles.fraction, styles.btn_grey)}
+            onClick={fractionNumber}>¹⁄ₓ</button>
+            <button type="button" className={classNames(styles.btn, styles.sqrt, styles.btn_grey)}
+            >√ₓ</button>
             <button type="button" className={classNames(styles.btn, styles.devide, styles.btn_grey, styles.simpleSign)}
             onClick={handleClickSimpleSigns}>/</button>
             

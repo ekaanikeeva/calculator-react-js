@@ -23,7 +23,7 @@
 
 .btn:hover {
   box-shadow: 1px 1px 3px 1px #ccb6dd;
-  background-color: #efe9e9;
+  background-color: #ffbd7e;
   transition: background-color 0.3s ease box-shadow 0.3s ease;
 }
 
