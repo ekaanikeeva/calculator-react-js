@@ -74,6 +74,17 @@ function NumAndSignButtons ({ setFirst, setSecond, setSign, setResult,
         }
     }
 
+    function sqrtNumber () {
+        if (whatIsNumber === 'firstNum') {
+            setFirst(Math.sqrt(firstNumber));
+            setResult(firstNumber);
+        }
+        else if (whatIsNumber === 'secondNum') {
+            setSecond(Math.sqrt(secondNumber));
+            setResult(secondNumber);
+        }
+    }
+
     return (
         <section className={styles.buttons}>
             <button type="button" className={classNames(styles.btn, styles.btn_grey, styles.quadrate)}
@@ -81,7 +92,7 @@ function NumAndSignButtons ({ setFirst, setSecond, setSign, setResult,
             <button type="button" className={classNames(styles.btn, styles.fraction, styles.btn_grey)}
             onClick={fractionNumber}>¹⁄ₓ</button>
             <button type="button" className={classNames(styles.btn, styles.sqrt, styles.btn_grey)}
-            >√ₓ</button>
+            onClick={sqrtNumber}>√ₓ</button>
             <button type="button" className={classNames(styles.btn, styles.devide, styles.btn_grey, styles.simpleSign)}
             onClick={handleClickSimpleSigns}>/</button>
             
