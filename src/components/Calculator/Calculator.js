@@ -101,7 +101,7 @@ function Calculator ({ setFirst, setSecond, setSign, setResult, firstNumber, sec
     return (
     <form className={styles.form} onSubmit={handleSubmit} >
         <Result setResult={setResult} fullFormula={fullFormula} />
-        <MemoryButtons />
+        <MemoryButtons setFirst={setFirst} setSecond={setSecond} whatIsNumber={whatIsNumber}/>
         <SignButtons setFirst={setFirst} setSecond={setSecond} setSign={setSign} 
         setResult={setResult} finish={finish} setFinish={setFinish} whatIsNumber={whatIsNumber} 
         setWhatIsNumber={setWhatIsNumber}/>
