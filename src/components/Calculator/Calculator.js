@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from './Calculator.module.css';
 import Result from "../Result/Result";
 import MemoryButtons from "../MemoryButtons/MemoryButtons";
@@ -11,14 +11,25 @@ import NumAndSignButtons from "../NumAndSignButtons/NumAndSignButtons";
 // import { SignContext } from "../../context/SignContext";
 
 function Calculator ({ setFirst, setSecond, setSign, setResult, firstNumber, secondNumber,
-     sign, setIsSubmit, whatIsNumber, setWhatIsNumber}) {
+     sign, setIsSubmit, whatIsNumber, setWhatIsNumber, fullFormula, setFullFormula}) {
     // const result = useContext(ResultContext);
     // const firstNumber = useContext(FirstNumberContext);
     // const secondNumber = useContext(SecondNumberContext);
     // const sign = useContext(SignContext);
     const [finish, setFinish] = useState(false);
-    // const [isResult, setIsResult] = useState(false);
 
+    // useEffect(() => {
+    //     showFormula()
+    // }, [whatIsNumber])
+
+    // function showFormula () {
+    //     if (whatIsNumber === 'firstNum' && !finish) setFullFormula('');
+    //     else if (whatIsNumber === 'secondNum') setFullFormula(firstNumber + sign);
+    //     else if (finish) setFullFormula(firstNumber + sign + secondNumber + `=`)
+    //   //   setFullFormula((firstNumber !== '' && secondNumber !== '' && sign !== '' ? firstNumber + sign  + secondNumber) +  
+    //   // (firstNumber !==''`=` : ''))
+    //   console.log(fullFormula)
+    //   }
     // сосчитать числа + - / *
     function calculate () {
         
@@ -49,7 +60,7 @@ function Calculator ({ setFirst, setSecond, setSign, setResult, firstNumber, sec
                     setSecond('')
                     return;
                 }
-                
+    
                 setFirst(firstNumber / secondNumber)
                 // setIsResult(true)
                 break;
@@ -61,7 +72,7 @@ function Calculator ({ setFirst, setSecond, setSign, setResult, firstNumber, sec
         // setResult(firstNumber)
         setIsSubmit(false)
         setWhatIsNumber('firstNum')
-        // whatIsNumber = 'firstNum';
+
     }
 
     // для знаков
@@ -89,7 +100,7 @@ function Calculator ({ setFirst, setSecond, setSign, setResult, firstNumber, sec
 
     return (
     <form className={styles.form} onSubmit={handleSubmit} >
-        <Result setResult={setResult} />
+        <Result setResult={setResult} fullFormula={fullFormula} />
         <MemoryButtons />
         <SignButtons setFirst={setFirst} setSecond={setSecond} setSign={setSign} 
         setResult={setResult} finish={finish} setFinish={setFinish} whatIsNumber={whatIsNumber} 
