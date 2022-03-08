@@ -20,7 +20,6 @@ function SignButtons({ setFirst, setSecond, setSign, setResult,
         setSecond('');
         setSign('');
         setFinish(false);
-        // setResult(0)
     }
     
     // очистить число
@@ -30,13 +29,11 @@ function SignButtons({ setFirst, setSecond, setSign, setResult,
     }
 
     function backspace () {
-        
         if (result === 0 || result === '') return;
         else {
             console.log(whatIsNumber, result)
             let reduceValue = result.split('');
             reduceValue.pop();
-            
             setResult(reduceValue.join(''));
             if (whatIsNumber === 'firstNum') setFirst(reduceValue.join(''));
             else if (whatIsNumber === 'secondNum') setSecond(reduceValue.join(''));

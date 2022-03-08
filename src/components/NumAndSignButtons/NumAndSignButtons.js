@@ -85,6 +85,22 @@ function NumAndSignButtons ({ setFirst, setSecond, setSign, setResult,
         }
     }
 
+    // общая функция смены знака с - на + и наоборот
+    function changeNumberSign (number, setNumber) {
+        if (number > 0) return setNumber(`-${number}`);
+        else {
+            let positiveNumber = number.split('');
+            positiveNumber.shift();
+            return setNumber(positiveNumber.join(''));
+        } 
+    }
+
+    // вызов общей функции смены знака для конкретного числа
+    function changeCurrentSign () {
+        if (whatIsNumber === 'firstNum') changeNumberSign(firstNumber, setFirst);
+        else if (whatIsNumber === 'secondNum') changeNumberSign(secondNumber, setSecond);
+    }
+
     return (
         <section className={styles.buttons}>
             <button type="button" className={classNames(styles.btn, styles.btn_grey, styles.quadrate)}
@@ -124,7 +140,8 @@ function NumAndSignButtons ({ setFirst, setSecond, setSign, setResult,
             <button type="button" className={classNames(styles.btn, styles.plus, styles.btn_grey, styles.simpleSign)}
             onClick={handleClickSimpleSigns}>+</button>
             
-            <button type="button" className={classNames(styles.btn, styles.changeSign)}>+/-</button>
+            <button type="button" className={classNames(styles.btn, styles.changeSign)}
+            onClick={changeCurrentSign}>+/-</button>
             <button type="button" className={classNames(styles.btn, styles.zero, styles.btn_white, styles.num)}
             onClick={handleClickNums}>0</button>
             <button type="button" className={classNames(styles.btn, styles.comma, styles.btn_white, styles.num)}
