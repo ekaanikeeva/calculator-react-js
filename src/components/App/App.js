@@ -26,12 +26,14 @@ function App() {
   }
 
 useEffect(()=> {
-  // showFormula()
+
   console.log(firstNumber, sign, secondNumber)
   if (whatIsNumber === 'firstNum') setResult(firstNumber)
   else if (whatIsNumber === 'secondNum') setResult(secondNumber)
   else setResult(sign)
 }, [firstNumber, sign, secondNumber, whatIsNumber])
+
+
 
   return (
     <div>

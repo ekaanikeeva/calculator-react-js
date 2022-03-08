@@ -63,6 +63,7 @@ function NumAndSignButtons ({ setFirst, setSecond, setSign, setResult,
         }
     }
 
+    // дробь 1/число
     function fractionNumber () {
         if (whatIsNumber === 'firstNum') {
             setFirst(1 / firstNumber);
@@ -74,6 +75,7 @@ function NumAndSignButtons ({ setFirst, setSecond, setSign, setResult,
         }
     }
 
+    // корень числа
     function sqrtNumber () {
         if (whatIsNumber === 'firstNum') {
             setFirst(Math.sqrt(firstNumber));

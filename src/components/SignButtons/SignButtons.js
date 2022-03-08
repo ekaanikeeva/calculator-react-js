@@ -2,15 +2,15 @@ import React, { useContext, useState } from "react";
 import styles from "./SignButtons.module.css";
 import classNames from "classnames";
 import { ResultContext } from "../../context/ResultContext";
-// import { FirstNumberContext } from "../../context/FirstNumberContext";
-// import { SecondNumberContext } from "../../context/SecondNumberContext";
-// import { SignContext } from "../../context/SignContext";
+import { FirstNumberContext } from "../../context/FirstNumberContext";
+import { SecondNumberContext } from "../../context/SecondNumberContext";
+import { SignContext } from "../../context/SignContext";
 
 function SignButtons({ setFirst, setSecond, setSign, setResult, 
     finish, setFinish, whatIsNumber, setWhatIsNumber }) {
-    // const firstNumber = useContext(FirstNumberContext);
-    // const secondNumber = useContext(SecondNumberContext);
-    // const sign = useContext(SignContext);
+    const firstNumber = useContext(FirstNumberContext);
+    const secondNumber = useContext(SecondNumberContext);
+    const sign = useContext(SignContext);
     const result = useContext(ResultContext);
     const [changeValue, setChangeValue] = useState('');
 
@@ -40,10 +40,43 @@ function SignButtons({ setFirst, setSecond, setSign, setResult,
         }
     }
 
+    function percent () {
+    if (whatIsNumber === 'firstNum') return setFirst('');
+    else if (whatIsNumber === 'secondNum') {
+        switch (sign) {
+            case '+':
+                setSecond(secondNumber * firstNumber / 100);
+                break;
+            case '-':
+                setSecond(firstNumber - secondNumber * firstNumber / 100);
+                break;
+            case '×':
+                setFirst(secondNumber * firstNumber / 100);
+                whatIsNumber = 'firstNum';
+                // setResult(firstNumber)
+                setFinish(true);
+                setSign('');
+                setSecond('');
+                
+                break;
+            case '/':
+                setSecond(secondNumber / 100);
+                setFirst(firstNumber / secondNumber);
+                setFinish(true);
+                setSign('')
+                setSecond('');
+                whatIsNumber = 'firstNum';
+                break;
+            default:
+        }
+    }
+}
+
     return (
     <section className={styles.signButtons}>
 
-        <button type="button" className={classNames(styles.btn, styles.percent, styles.btn_grey)}>%</button>
+        <button type="button" className={classNames(styles.btn, styles.percent, styles.btn_grey)}
+        onClick={percent}>%</button>
         <button type="button" className={classNames(styles.btn, styles.c, styles.btn_grey)}
         onClick={clearResult}>c</button>
         <button type="button" className={classNames(styles.btn, styles.btn_grey, styles.ce)}
