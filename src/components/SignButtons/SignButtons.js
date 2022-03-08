@@ -41,7 +41,7 @@ function SignButtons({ setFirst, setSecond, setSign, setResult,
     }
 
     function percent () {
-    if (whatIsNumber === 'firstNum') return setFirst('');
+    if (whatIsNumber === 'firstNum' && secondNumber === '') return setFirst('');
     else if (whatIsNumber === 'secondNum') {
         switch (sign) {
             case '+':
@@ -52,20 +52,19 @@ function SignButtons({ setFirst, setSecond, setSign, setResult,
                 break;
             case '×':
                 setFirst(secondNumber * firstNumber / 100);
-                whatIsNumber = 'firstNum';
-                // setResult(firstNumber)
+                setWhatIsNumber('firstNum');
                 setFinish(true);
                 setSign('');
                 setSecond('');
                 
                 break;
             case '/':
-                setSecond(secondNumber / 100);
-                setFirst(firstNumber / secondNumber);
+                setFirst(firstNumber / (secondNumber / 100));
+                setWhatIsNumber('firstNum');
                 setFinish(true);
                 setSign('')
                 setSecond('');
-                whatIsNumber = 'firstNum';
+                
                 break;
             default:
         }

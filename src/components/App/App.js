@@ -17,17 +17,17 @@ function App() {
   const [whatIsNumber, setWhatIsNumber] = useState(null);
   const [fullFormula, setFullFormula] = useState('');
 
-  function showFormula () {
-    if (whatIsNumber === 'firstNum' || whatIsNumber === null) setFullFormula('');
-    else if (whatIsNumber === 'secondNum') setFullFormula(firstNumber + sign)
-  //   setFullFormula((firstNumber !== '' && secondNumber !== '' && sign !== '' ? firstNumber + sign  + secondNumber) +  
-  // (firstNumber !==''`=` : ''))
-  console.log(fullFormula)
-  }
+  // function showFormula () {
+  //   if (whatIsNumber === 'firstNum' || whatIsNumber === null) setFullFormula('');
+  //   else if (whatIsNumber === 'secondNum') setFullFormula(firstNumber + sign)
+  // //   setFullFormula((firstNumber !== '' && secondNumber !== '' && sign !== '' ? firstNumber + sign  + secondNumber) +  
+  // // (firstNumber !==''`=` : ''))
+  // console.log(fullFormula)
+  // }
 
 useEffect(()=> {
 
-  console.log(firstNumber, sign, secondNumber)
+  console.log(firstNumber, sign, secondNumber, whatIsNumber)
   if (whatIsNumber === 'firstNum') setResult(firstNumber)
   else if (whatIsNumber === 'secondNum') setResult(secondNumber)
   else setResult(sign)
