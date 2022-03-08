@@ -16,22 +16,35 @@ function App() {
   const [isResult, setIsResult] = useState(false);
   const [whatIsNumber, setWhatIsNumber] = useState(null);
   const [fullFormula, setFullFormula] = useState('');
-
-  // function showFormula () {
-  //   if (whatIsNumber === 'firstNum' || whatIsNumber === null) setFullFormula('');
-  //   else if (whatIsNumber === 'secondNum') setFullFormula(firstNumber + sign)
-  // //   setFullFormula((firstNumber !== '' && secondNumber !== '' && sign !== '' ? firstNumber + sign  + secondNumber) +  
-  // // (firstNumber !==''`=` : ''))
-  // console.log(fullFormula)
-  // }
+  const [isOpenBracket, setIsOpenBracket] = useState(null)
 
 useEffect(()=> {
+  console.log(firstNumber, sign, secondNumber, isOpenBracket)
+  if (whatIsNumber === 'firstNum' && sign !== '') {
+      setFullFormula(firstNumber + ' ' + sign); 
+      setResult(sign)
+      console.log('sign')
+  }
+  else if (whatIsNumber === 'firstNum') {
+    setResult(firstNumber);
+    setFullFormula(firstNumber);
+    console.log('first')
+  } 
+  else if (whatIsNumber === 'secondNum') {
+    setResult(secondNumber)
+    setFullFormula(firstNumber + ' ' + sign + ' ' + secondNumber)
+    console.log('sec')
+  } 
+  else {
+    setResult(sign)
+    console.log('sign22')
+  } 
+  if (isOpenBracket) setFullFormula(isOpenBracket + ' ' + firstNumber + ' ' + sign + ' ' + secondNumber + ' ' + `)`)
+console.log(isOpenBracket)
+}, [firstNumber, secondNumber, sign, whatIsNumber, isOpenBracket])
 
-  console.log(firstNumber, sign, secondNumber, whatIsNumber)
-  if (whatIsNumber === 'firstNum') setResult(firstNumber)
-  else if (whatIsNumber === 'secondNum') setResult(secondNumber)
-  else setResult(sign)
-}, [firstNumber, sign, secondNumber, whatIsNumber])
+
+
 
 
 
@@ -44,7 +57,7 @@ useEffect(()=> {
               <Calculator setFirst={setFirstNumber} setSecond={setSecondNumber} 
               setSign={setSign} setResult={setResult} setIsSubmit={setIsSubmit}
               setIsResult={setIsResult} isResult={isResult} fullFormula={fullFormula} setFullFormula={setFullFormula}
-              firstNumber={firstNumber} secondNumber={secondNumber}sign={sign}
+              firstNumber={firstNumber} secondNumber={secondNumber}sign={sign} isOpenBracket={isOpenBracket} setIsOpenBracket={setIsOpenBracket}
               whatIsNumber={whatIsNumber} setWhatIsNumber={setWhatIsNumber} />
             </SignContext.Provider>
           </SecondNumberContext.Provider>

@@ -1,4 +1,5 @@
-import React, { useContext, useState } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import styles from "./SignButtons.module.css";
 import classNames from "classnames";
 import { ResultContext } from "../../context/ResultContext";
@@ -7,19 +8,25 @@ import { SecondNumberContext } from "../../context/SecondNumberContext";
 import { SignContext } from "../../context/SignContext";
 
 function SignButtons({ setFirst, setSecond, setSign, setResult, 
-    finish, setFinish, whatIsNumber, setWhatIsNumber }) {
+    finish, setFinish, whatIsNumber, setWhatIsNumber, setFullFormula,
+    calculate, isOpenBracket, setIsOpenBracket}) {
     const firstNumber = useContext(FirstNumberContext);
     const secondNumber = useContext(SecondNumberContext);
     const sign = useContext(SignContext);
     const result = useContext(ResultContext);
-    const [changeValue, setChangeValue] = useState('');
 
+    const [savedSign, setSavedSign] = useState(null);
+    const [savedValue, setSavedValue] = useState(null);
+    
+    const [currentValue, setCurrentValue] = useState('');
     // очистить все
     function clearResult () {
         setFirst('');
         setSecond('');
         setSign('');
         setFinish(false);
+        setFullFormula(null);
+        setIsOpenBracket(null)
     }
     
     // очистить число
@@ -64,11 +71,55 @@ function SignButtons({ setFirst, setSecond, setSign, setResult,
                 setFinish(true);
                 setSign('')
                 setSecond('');
-                
                 break;
             default:
         }
     }
+}
+
+useEffect(() => {
+    if (firstNumber !== '' && sign !== '' && secondNumber !=='') {
+        if(sign === '+') setCurrentValue((+firstNumber) + (+secondNumber))
+        else if(sign === '-') setCurrentValue(firstNumber - secondNumber)
+        else if(sign === '*') setCurrentValue(firstNumber * secondNumber)
+        else if (sign === '/') setCurrentValue(firstNumber / secondNumber)
+    }
+}, [whatIsNumber])
+
+function openBracket() {
+    if (firstNumber !== '' && sign !== '' && secondNumber !=='') {
+        setFirst(currentValue);
+        setIsOpenBracket(`(`)
+        setSign('');
+        setSecond('');
+        setWhatIsNumber('firstNum')
+    }
+    else if (firstNumber !== '' && secondNumber === '') {
+        if(sign === '') setIsOpenBracket(`(`);
+        else {
+            setSavedValue(firstNumber);
+            setSavedSign(sign);
+            setIsOpenBracket(firstNumber + ' ' + sign + ' ' + `(`);
+            clearResult();
+        }
+        
+    }
+    setIsOpenBracket(firstNumber + ' ' + sign + ' ' + `(`);
+}
+
+function closeBracket() {
+
+    if(savedValue === '' || savedValue === null) return;
+    else if ( savedSign !== '') setSign(savedSign);
+    if(savedSign !== null && savedValue !== null) {
+        setIsOpenBracket(savedValue + savedSign)
+    } else setIsOpenBracket(`(` + firstNumber + secondNumber + `)`)
+    
+    setSecond(currentValue);
+    setFirst(savedValue);
+    setSavedSign(null);
+    setSavedValue(null);
+    setIsOpenBracket(null)
 }
 
     return (
@@ -82,8 +133,10 @@ function SignButtons({ setFirst, setSecond, setSign, setResult,
         onClick={clearNum}>ce</button>
         <button type="button" className={classNames(styles.btn, styles.backspace, styles.btn_grey)}
         onClick={backspace}>⌫</button>
-        <button type="button" className={classNames(styles.btn, styles.openBracket, styles.btn_grey)}>(</button>
-        <button type="button" className={classNames(styles.btn, styles.closeBracket, styles.btn_grey)}>)</button>
+        <button type="button" className={classNames(styles.btn, styles.openBracket, styles.btn_grey)}
+        onClick={openBracket}>(</button>
+        <button type="button" className={classNames(styles.btn, styles.closeBracket, styles.btn_grey)}
+        onClick={closeBracket}>)</button>
     
     </section>
   );

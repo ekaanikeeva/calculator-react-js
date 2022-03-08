@@ -30,13 +30,14 @@ function minusSaveMemory () {
   return setMemorySave(memorySave - result);
 }
 
-// вывести сохраненное число на экран
+// вывести сохраненное число на экран и заменить им число
 function memoryRead () {
   if (whatIsNumber === 'firstNum') setFirst(memorySave)
   else if (whatIsNumber === 'secondNum') setSecond(memorySave)
   return;
 }
 
+// очистить память
 function memoryClean () {
   setMemorySave(null)
 }
