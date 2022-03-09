@@ -12,7 +12,6 @@ function App() {
   const [secondNumber, setSecondNumber] = useState('');
   const [sign, setSign] = useState('');
   const [result, setResult] = useState(0);
-  const [isSubmit, setIsSubmit] = useState(false);
   const [isResult, setIsResult] = useState(false);
   const [whatIsNumber, setWhatIsNumber] = useState(null);
   const [fullFormula, setFullFormula] = useState('');
@@ -23,30 +22,21 @@ useEffect(()=> {
   if (whatIsNumber === 'firstNum' && sign !== '') {
       setFullFormula(firstNumber + ' ' + sign); 
       setResult(sign)
-      console.log('sign')
   }
   else if (whatIsNumber === 'firstNum') {
     setResult(firstNumber);
     setFullFormula(firstNumber);
-    console.log('first')
   } 
   else if (whatIsNumber === 'secondNum') {
     setResult(secondNumber)
     setFullFormula(firstNumber + ' ' + sign + ' ' + secondNumber)
-    console.log('sec')
   } 
   else {
     setResult(sign)
-    console.log('sign22')
   } 
-  if (isOpenBracket) setFullFormula(isOpenBracket + ' ' + firstNumber + ' ' + sign + ' ' + secondNumber + ' ' + `)`)
-console.log(isOpenBracket)
+  if (isOpenBracket) setFullFormula(isOpenBracket + ' ' + firstNumber + ' ' + sign + ' ' + secondNumber)
+
 }, [firstNumber, secondNumber, sign, whatIsNumber, isOpenBracket])
-
-
-
-
-
 
   return (
     <div>
@@ -55,7 +45,7 @@ console.log(isOpenBracket)
           <SecondNumberContext.Provider value={secondNumber}>
             <SignContext.Provider value={sign}>
               <Calculator setFirst={setFirstNumber} setSecond={setSecondNumber} 
-              setSign={setSign} setResult={setResult} setIsSubmit={setIsSubmit}
+              setSign={setSign} setResult={setResult}
               setIsResult={setIsResult} isResult={isResult} fullFormula={fullFormula} setFullFormula={setFullFormula}
               firstNumber={firstNumber} secondNumber={secondNumber}sign={sign} isOpenBracket={isOpenBracket} setIsOpenBracket={setIsOpenBracket}
               whatIsNumber={whatIsNumber} setWhatIsNumber={setWhatIsNumber} />

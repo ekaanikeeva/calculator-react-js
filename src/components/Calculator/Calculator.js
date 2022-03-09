@@ -1,24 +1,18 @@
+/* eslint-disable no-useless-concat */
 /* eslint-disable no-undef */
-import React, { useContext, useEffect, useState, useCallback } from "react";
+import React, { useState } from "react";
 import styles from './Calculator.module.css';
 import Result from "../Result/Result";
 import MemoryButtons from "../MemoryButtons/MemoryButtons";
 import SignButtons from "../SignButtons/SignButtons";
 import NumAndSignButtons from "../NumAndSignButtons/NumAndSignButtons";
-import { ResultContext } from "../../context/ResultContext";
-// import { FirstNumberContext } from "../../context/FirstNumberContext";
-// import { SecondNumberContext } from "../../context/SecondNumberContext";
-// import { SignContext } from "../../context/SignContext";
 
 function Calculator ({ setFirst, setSecond, setSign, setResult, firstNumber, secondNumber,
-    sign, setIsSubmit, whatIsNumber, setWhatIsNumber, fullFormula, setFullFormula, setIsResult,
+    sign, whatIsNumber, setWhatIsNumber, fullFormula, setFullFormula, setIsResult,
     isOpenBracket, setIsOpenBracket,
 }) {
 
-    const result = useContext(ResultContext);
-    // const firstNumber = useContext(FirstNumberContext);
-    // const secondNumber = useContext(SecondNumberContext);
-    // const sign = useContext(SignContext);
+
     const [finish, setFinish] = useState(false);
 
 
@@ -61,16 +55,13 @@ function Calculator ({ setFirst, setSecond, setSign, setResult, firstNumber, sec
         setFinish(true);
         setSign('')
         setSecond('')
-        setIsSubmit(false)
         setWhatIsNumber('firstNum')
     }
+
     // для знаков
     function handleClickSimpleSigns (evt) {
         calculate();
         setSign(evt.target.textContent);
-        // if(!isResult) //setResult(sign)
-        // else //setResult(firstNumber)
-        setIsSubmit(true)
         setFinish(true);
     }
 
@@ -80,7 +71,6 @@ function Calculator ({ setFirst, setSecond, setSign, setResult, firstNumber, sec
         setIsOpenBracket(null)
         setFullFormula(firstNumber + ' ' + sign + ' ' + secondNumber + ' ' + `=`)
         if (firstNumber !== '' && secondNumber !== '' && sign === '') {
-            setIsSubmit(true)
             setFirst(secondNumber);
             setSecond('');
             return;

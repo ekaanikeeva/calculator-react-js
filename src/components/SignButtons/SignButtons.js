@@ -1,5 +1,6 @@
+/* eslint-disable no-useless-concat */
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useCallback, useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styles from "./SignButtons.module.css";
 import classNames from "classnames";
 import { ResultContext } from "../../context/ResultContext";
@@ -17,8 +18,8 @@ function SignButtons({ setFirst, setSecond, setSign, setResult,
 
     const [savedSign, setSavedSign] = useState(null);
     const [savedValue, setSavedValue] = useState(null);
-    
     const [currentValue, setCurrentValue] = useState('');
+
     // очистить все
     function clearResult () {
         setFirst('');
@@ -31,14 +32,17 @@ function SignButtons({ setFirst, setSecond, setSign, setResult,
     
     // очистить число
     function clearNum () {
-        if (whatIsNumber === 'firstNum') setFirst('');
+        if (whatIsNumber === 'firstNum') {
+            setFirst('');
+            setSign('');
+        } 
         else if (whatIsNumber === 'secondNum') setSecond('');
     }
 
+    // уменьшить / сбросить число
     function backspace () {
         if (result === 0 || result === '') return;
         else {
-            console.log(whatIsNumber, result)
             let reduceValue = result.split('');
             reduceValue.pop();
             setResult(reduceValue.join(''));
@@ -47,6 +51,7 @@ function SignButtons({ setFirst, setSecond, setSign, setResult,
         }
     }
 
+    // проценты
     function percent () {
     if (whatIsNumber === 'firstNum' && secondNumber === '') return setFirst('');
     else if (whatIsNumber === 'secondNum') {
@@ -86,6 +91,7 @@ useEffect(() => {
     }
 }, [whatIsNumber])
 
+// открыть скобочку
 function openBracket() {
     if (firstNumber !== '' && sign !== '' && secondNumber !=='') {
         setFirst(currentValue);
@@ -107,6 +113,7 @@ function openBracket() {
     setIsOpenBracket(firstNumber + ' ' + sign + ' ' + `(`);
 }
 
+// закрыть скобочку
 function closeBracket() {
 
     if(savedValue === '' || savedValue === null) return;
@@ -114,7 +121,6 @@ function closeBracket() {
     if(savedSign !== null && savedValue !== null) {
         setIsOpenBracket(savedValue + savedSign)
     } else setIsOpenBracket(`(` + firstNumber + secondNumber + `)`)
-    
     setSecond(currentValue);
     setFirst(savedValue);
     setSavedSign(null);
